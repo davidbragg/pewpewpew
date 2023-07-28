@@ -98,7 +98,7 @@ Nope. The examples in the wiki are using this structure as well (and probably wo
 
 The problem has to be how I'm trying to call the `quit` event then. The trace implies that as well with the issue being identified as an = missing at line 8 (but probably likely line 7 for realsies).
 
-Hah. Just misses putting the parens after the event call. It should have actually been `love.event.quit()`. This is what I get for just trying the function once I see it by name, rather than actually looking at the documentation. 
+Hah. Just missed putting the parens after the event call. It should have actually been `love.event.quit()`. This is what I get for just trying the function once I see it by name, rather than actually looking at the documentation. 
 
 Everything is working here now.
 
@@ -128,7 +128,7 @@ ioctl (GFEATURE): Broken pipe
 
 Let's see if we can figure out what's going on here. 
 
-It doesn't have if I just run `love` by itself. It is happening regardless of where I run `love .`. It doesn't seem to matter if there's a project in that folder or not. That implies there's something in the loader to run a project from a director throwing this. 
+It doesn't have if I just run `love` by itself. It is happening regardless of where I run `love .`. It doesn't seem to matter if there's a project in that folder or not. That implies there's something in the loader to run a project from a directory throwing this. 
 
 I'm not particularly worried about it for this project.
 
