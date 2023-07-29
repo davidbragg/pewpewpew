@@ -1,7 +1,7 @@
 # required
 - [x] resize window to 9:16
 - [x] close on ESC
-- [ ] vertically scrolling background
+- [x] vertically scrolling background
 - [ ] player
     - [ ] player sprite
     - [ ] movement (kbd w/ constraints)
