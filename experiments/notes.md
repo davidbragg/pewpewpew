@@ -140,7 +140,7 @@ A ha! Fuck all that noise! I figured out the bullshit from above. I suspected it
 
 Slapped that baby into my `conf.lua` and all the errors went away. Marvelous. Looks like the joystick module is loaded by default. I don't have a joystick connected. Et voila, bullshit.
 
-It'll be worth taking a close look through the configuration options at some point, I'm sure there's some helpful business in there.
+It'll be worth taking a close look through the default configuration options at some point, I'm sure there's some helpful business in there.
 
 ## Vertically Scrolling Background
 
@@ -163,7 +163,7 @@ function love.draw()
     love.graphics.draw(background, 0, 0)
 end
 ```
-Threw together a quick image in Krita (wrap around mode is teh business). Giving that a shot to see if it loads appropriately. And it does. Super.
+Threw together a quick image in Krita (wrap around mode is the business). Giving that a shot to see if it loads appropriately. And it does. Super.
 
 Let's get that `y` co-ordinate doing something.
 
