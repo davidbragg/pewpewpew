@@ -24,3 +24,4 @@
 - [ ] multiple enemies
 - [ ] bosses
 - [ ] events
+- [ ] player secondary attack
