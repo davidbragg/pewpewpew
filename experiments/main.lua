@@ -10,6 +10,13 @@ function love.load()
 	y = 0
 	y2 = 0
 
+	player = {}
+	player.image = love.graphics.newImage("images/player.png")
+	player.x = 225
+	player.y = 700
+	player.velocity = 250
+	player.nudge = 1
+
 	running = true
 end
 
@@ -21,6 +28,13 @@ function love.keyreleased(key)
 	if key == "escape" then
 		love.event.quit()
 	end
+
+	if key == "return" then
+		-- and cool == true?
+		if player.nudge == 1 then
+			player.nudge = 2.8
+		end
+	end
 end
 
 function love.update(dt)
@@ -30,10 +44,41 @@ function love.update(dt)
 
 		quad:setViewport(0, y, bg1:getWidth(), bg1:getHeight())
 		quad2:setViewport(0,y2, bg2:getWidth(), bg2:getHeight())
+
+		moveVert = love.keyboard.isDown("w") or love.keyboard.isDown("s")
+		moveHor = love.keyboard.isDown("a") or love.keyboard.isDown("d")
+		
+		playerSpeed = player.velocity
+		if (moveVert and moveHor) then
+			playerSpeed = playerSpeed / math.sqrt(2)
+		end
+
+		if love.keyboard.isDown("a") and player.x > 0 then
+			player.x = player.x - playerVelocity(dt)
+		elseif love.keyboard.isDown("d") and player.x < 418 then
+			player.x = player.x + playerVelocity(dt)
+		end
+		
+		if love.keyboard.isDown("w") and player.y > 400 then
+			player.y = player.y - playerVelocity(dt)
+		elseif love.keyboard.isDown("s") and player.y < 768 then
+			player.y = player.y + playerVelocity(dt)
+		end
+			
+		if player.nudge > 1 then
+			player.nudge = player.nudge - player.nudge * 0.05
+		elseif player.nudge < 1 then
+			player.nudge = 1
+		end
 	end
 end
 
 function love.draw()
 	love.graphics.draw(bg2, quad2, 0, 0, 0)
 	love.graphics.draw(bg1, quad, 0, 0, 0)
+	love.graphics.draw(player.image, player.x, player.y)
+end
+
+function playerVelocity(dt)
+	return playerSpeed * dt * player.nudge
 end

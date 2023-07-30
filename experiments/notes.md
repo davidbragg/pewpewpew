@@ -301,3 +301,107 @@ Got it. Cool. I think I've solved what I intended to do here. Let's see if we ca
 As expected, pretty easy. The default background is black (at least on my system) and will render transparency in pngs as expected. If the draw order is correct, draw the lowest object first, then things will layer appropriately. All you need to do is offset the viewports at different speeds and you get a little bit of parallax. Neat. 
 
 This seems like a good point to stop with this and move on to the next piece. There's definitely some refactoring available to clean this up, but this isn't that step in the process.
+
+# Saturday, July 29, 2023
+
+### Player
+
+Starting with the player sprite as this should be the easiest thing for me to take care of. I'll build out the player object at the same time, I guess. I really shouldn't need anything more than the sprite and the x/y coordinates to start with.
+
+I think the following will get me what I want.
+
+```
+player = {}
+player.sprite = love.graphics.newImage("images/player.png")
+player.x = someValue
+player.y = someValue
+```
+
+I think my values are x:225 and y:700 to put the player middle of the screen and a bit below the start of the bottom third. 
+
+Let's see if any of that works. 
+
+Creating a basic red triangle for the player.
+
+Yup. Just needed to draw it at the bottom of the list to ensure it's getting placed as the top of the stack.
+
+`love.graphics.draw(player.image, player.x, player.y)`
+
+Adding `player.velocity` for moving the player on key press. It'll make that a little easier to update.
+
+Movement is working. 
+
+```
+if love.keyboard.isDown("a") and player.x > 0 then
+	player.x = player.x - player.velocity * dt
+end
+if love.keyboard.isDown("d") and player.x < 418 then
+	player.x = player.x + player.velocity * dt
+end
+if love.keyboard.isDown("w") and player.y > 400 then
+	player.y = player.y - player.velocity * dt
+end
+if love.keyboard.isDown("s") and player.y < 768 then
+	player.y = player.y + player.velocity * dt
+end
+```
+
+The hardcoded values are fine for now. I think I'd prefer to use the window width and height and then calculate the boundaries based off that. Again, fine for now. 
+
+This also gives us the problem when moving on diagonals increases the player speed. This is also fine for now.
+
+This feels really stiff using a keyboard. I think I'm going to add joystick control to the list. I think that would simplify the player movements though. We'd just be getting the analog stick x/y and updating position based off those +/- values. Would make it feel a lot more organic. 
+
+Player "nudge"
+
+Conceptually this would be like a tiny boost that starts quickly and falls off naturally. Logarithmically? Is that what I'm trying to do? I don't know. Why didn't I math more? 
+
+Added `player.nudge = 1` to the player object. Also created the following so that I don't have to calculate the player movement speed in each of the directions.
+
+```
+function playerVelocity(dt)
+	return player.velocity * dt * player.nudge
+end
+```
+
+Reduces player movement lines to 
+```
+if love.keyboard.isDown("s") and player.y < 768 then
+	player.y = player.y + playerVelocity(dt)
+end
+```
+
+I'm not sure why I have to pass `dt`. I'm assuming because it's a property of the update function.
+
+I need to figure out how to temporarily increase the nudge value, how to fall off quickly/naturally, and stop updating the nudge value once we get back to 1. I also need to assign a key to trigger the nudge. It's worth considering a cool off period so the player can't spam it. 
+
+Let's start by putting a key in there to toggle the nudge value between 1 and 1.3. Will continue on from there. 
+
+That works just fine. Removing the toggle as it won't be relevant when I've got the nudge ramp down in place. 2.8 also feels a lot better than 1.3 as well.
+
+```
+	if key == "return" then
+		if player.nudge == 1 then
+			player.nudge = 2.8
+		end
+	end
+```
+
+Ehhh. Just realized that I've got controls fighting here. Left and right effectively cancel out. As down up and down. I need to fix that. might as well fix the diagonal speed at the same time. 
+
+Controls are fixed and I've implemented a basic nudge feature. It's pretty straight forward in that it just subtracts 5% from the player nudge speed until we get back to a number of 1. 
+
+```
+if player.nudge > 1 then
+	player.nudge = player.nudge - player.nudge * 0.05
+elseif player.nudge < 1 then
+	player.nudge = 1
+end
+```
+
+That really leaves me with two player problems to solve. 
+
+1. nudge cool off
+2. pew pew
+
+Those are problems for future Dave.

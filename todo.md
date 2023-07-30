@@ -3,10 +3,11 @@
 - [x] close on ESC
 - [x] vertically scrolling background
 - [ ] player
-    - [ ] player sprite
-    - [ ] movement (kbd w/ constraints)
+    - [x] player sprite
+    - [x] movement (kbd w/ constraints)
     - [ ] pew pew
-    - [ ] nudge boost
+    - [x] nudge boost
+    - [ ] nudge cool off
 - [ ] music loop
 - [ ] enemy
     - [ ] enemy sprite
@@ -14,6 +15,7 @@
     - [ ] collision
     - [ ] pew pew
     - [ ] scoring
+- [ ] joystick support
 
 # desired
 - [ ] title screen
