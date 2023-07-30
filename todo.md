@@ -19,7 +19,7 @@
 
 # desired
 - [ ] title screen
-- [ ] layered, seamless scrolling background
+- [x] layered, seamless scrolling background
 - [ ] dynamic music pathing
 - [ ] levels
 - [ ] power ups
