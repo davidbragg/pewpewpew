@@ -7,7 +7,7 @@
     - [x] movement (kbd w/ constraints)
     - [ ] pew pew
     - [x] nudge boost
-    - [ ] nudge cool off
+    - [x] nudge cool off
 - [ ] music loop
 - [ ] enemy
     - [ ] enemy sprite

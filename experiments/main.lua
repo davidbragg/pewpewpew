@@ -1,4 +1,6 @@
 function love.load()
+	nudge_cooldown_period = 60
+
 	bg1 = love.graphics.newImage("images/bgloop.png")
 	bg2 = love.graphics.newImage("images/bgloop2.png")
 
@@ -16,6 +18,7 @@ function love.load()
 	player.y = 700
 	player.velocity = 250
 	player.nudge = 1
+	player.cool = 0
 
 	running = true
 end
@@ -29,10 +32,10 @@ function love.keyreleased(key)
 		love.event.quit()
 	end
 
-	if key == "return" then
-		-- and cool == true?
+	if key == "return" and player.cool == 0 then
 		if player.nudge == 1 then
 			player.nudge = 2.8
+			player.cool = nudge_cooldown_period
 		end
 	end
 end
@@ -69,6 +72,10 @@ function love.update(dt)
 			player.nudge = player.nudge - player.nudge * 0.05
 		elseif player.nudge < 1 then
 			player.nudge = 1
+		end
+
+		if player.cool > 0 then
+			player.cool = player.cool - 1
 		end
 	end
 end
