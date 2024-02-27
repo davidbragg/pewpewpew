@@ -1,12 +1,5 @@
 # pewpewpew
-Proof of concept a vertically scrolling shmup (Twin Cobra/Raiden/1942 style) in [löve](https://love2d.org).
 
-I have no idea what I'm doing, so I plan to walk through and build a bunch of little experiments to figure out the pieces that I need to make this work. Ideally, I should be able to walk through the various experiments and use that to build out the full PoC. 
+Proof of concept of a vertically scrolling shmup in the style of games like Twin Cobra, 1942, and Raiden. This project was originally started in [löve](https://love2d.org) but has since switched into Godot.
 
-I'll probably document some things while I'm in the process. These aren't notes meant for other people. These are the kind of notes I make for myself while I'm trying things out. 
-
-It's worth acknowledging the following.
-
-I am not a game developer, have never touched löve before, don't know any lua, and really have zero clue as to what I'm doing in general. Take anything you see in here with a grain of salt and consider that I may be doing things absolutely wrong.
-
-The `required` section of [todo.md](todo.md) is the extent of what I would really like to get done with this project. If I get further, that would be alright as well. 
+The purpose of the project is get some experience with Godot and developing in GDScript. It is not meant to be a fully featured game. 
