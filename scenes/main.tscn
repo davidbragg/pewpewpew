@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bssj84qd2a7wc"]
+
+[ext_resource type="PackedScene" uid="uid://dy8sinaxdks5l" path="res://scenes/background.tscn" id="1_6srfk"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_right = 450.0
+offset_bottom = 800.0
+color = Color(0, 0, 0.207843, 1)
+
+[node name="Background" parent="." instance=ExtResource("1_6srfk")]
