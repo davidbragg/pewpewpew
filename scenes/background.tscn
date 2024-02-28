@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://dy8sinaxdks5l"]
+
+[ext_resource type="Shader" path="res://shaders/bg2.gdshader" id="1_og12l"]
+[ext_resource type="Texture2D" uid="uid://crtewfe874sci" path="res://assets/bgloop2.png" id="2_7c23h"]
+[ext_resource type="Shader" path="res://shaders/bg.gdshader" id="3_apytn"]
+[ext_resource type="Texture2D" uid="uid://bp2u6o7sygvjh" path="res://assets/bgloop.png" id="3_gvshd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_taoqw"]
+shader = ExtResource("1_og12l")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sb0tp"]
+shader = ExtResource("3_apytn")
+
+[node name="Background" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_taoqw")
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_7c23h")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_sb0tp")
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_gvshd")
