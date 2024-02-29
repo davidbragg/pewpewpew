@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bssj84qd2a7wc"]
+[gd_scene load_steps=3 format=3 uid="uid://bssj84qd2a7wc"]
 
 [ext_resource type="PackedScene" uid="uid://dy8sinaxdks5l" path="res://scenes/background.tscn" id="1_6srfk"]
+[ext_resource type="PackedScene" uid="uid://b4rebdb6c5p5p" path="res://scenes/player.tscn" id="2_mxru2"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -10,3 +11,15 @@ offset_bottom = 800.0
 color = Color(0, 0, 0.207843, 1)
 
 [node name="Background" parent="." instance=ExtResource("1_6srfk")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(217, 491)
+polygon = PackedVector2Array(239, -491, 238, 309, -222, 310, -222, -490, 233, -491, 283, -487, 278, -528, -273, -527, -250, 356, 291, 350, 283, -487)
+
+[node name="Player" parent="." instance=ExtResource("2_mxru2")]
+position = Vector2(221, 649)
+max_speed = 300
+acceleration = 800
+friction = 800
