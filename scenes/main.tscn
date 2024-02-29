@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bssj84qd2a7wc"]
+[gd_scene load_steps=4 format=3 uid="uid://bssj84qd2a7wc"]
 
 [ext_resource type="PackedScene" uid="uid://dy8sinaxdks5l" path="res://scenes/background.tscn" id="1_6srfk"]
+[ext_resource type="PackedScene" uid="uid://b6elytksonnf" path="res://scenes/play_boundary.tscn" id="2_emvnx"]
+[ext_resource type="PackedScene" uid="uid://b4rebdb6c5p5p" path="res://scenes/player.tscn" id="2_mxru2"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -10,3 +12,8 @@ offset_bottom = 800.0
 color = Color(0, 0, 0.207843, 1)
 
 [node name="Background" parent="." instance=ExtResource("1_6srfk")]
+
+[node name="Play_Boundary" parent="." instance=ExtResource("2_emvnx")]
+
+[node name="Player" parent="." instance=ExtResource("2_mxru2")]
+position = Vector2(221, 649)
