@@ -11,7 +11,7 @@ shader = ExtResource("1_og12l")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sb0tp"]
 shader = ExtResource("3_apytn")
 
-[node name="Background" type="Control"]
+[node name="Clouds" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
