@@ -15,11 +15,11 @@ func get_input():
 	input.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	input.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 
-	return input.normalized()
+	input = input.normalized()
 
 
 func player_movement(delta):
-	input = get_input()
+	get_input()
 
 	if input != Vector2.ZERO:
 		velocity = velocity.move_toward(input * max_speed, acceleration * delta)
