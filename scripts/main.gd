@@ -1,6 +1,8 @@
 extends Node2D
 
 @export var kamikaze_scene : PackedScene
+@export var floater_scene : PackedScene
+@export var hunter_scene : PackedScene
 
 var spawn_kamikaze : bool = false
 var kamikaze_count : int = 0
