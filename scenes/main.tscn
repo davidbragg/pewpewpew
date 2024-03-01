@@ -8,29 +8,33 @@
 
 [sub_resource type="Curve2D" id="Curve2D_0ok36"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -1, -23, 0, 0, 0, 0, 454, -22)
+"points": PackedVector2Array(0, 0, 0, 0, 1, -37, 0, 0, 0, 0, 456, -35)
 }
 point_count = 2
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_i3dns")
 kamikaze_scene = ExtResource("5_wcqs8")
-kamikaze_max = 16
+kamikaze_max = 5
+kamikaze_increase = 0
 
 [node name="KamikazeTimer" type="Timer" parent="."]
 wait_time = 0.16
 autostart = true
 
 [node name="KamikazeCooldownTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 2.0
 autostart = true
 
 [node name="KamikazeSpawn" type="Path2D" parent="."]
 curve = SubResource("Curve2D_0ok36")
 
 [node name="KamikazeSpawnLocation" type="PathFollow2D" parent="KamikazeSpawn"]
-position = Vector2(-1, -23)
-rotation = 0.0021978
+position = Vector2(1, -37)
+rotation = 0.00439558
+rotates = false
+cubic_interp = false
+loop = false
 
 [node name="Background" type="ColorRect" parent="."]
 offset_right = 450.0

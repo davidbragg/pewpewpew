@@ -3,10 +3,11 @@ extends Node2D
 @export var kamikaze_scene : PackedScene
 @export var floater_scene : PackedScene
 @export var hunter_scene : PackedScene
+@export var kamikaze_max : int = 3
+@export var kamikaze_increase : int = 3
 
 var spawn_kamikaze : bool = false
 var kamikaze_count : int = 0
-@export var kamikaze_max : int = 3
 
 func _on_kamikaze_cooldown_timer_timeout():
 	spawn_kamikaze = true
@@ -25,7 +26,7 @@ func add_kamikaze():
 	if kamikaze_count >= kamikaze_max:
 		spawn_kamikaze = false
 		kamikaze_count = 0
-		kamikaze_max += 3
+		kamikaze_max += kamikaze_increase
 
 
 

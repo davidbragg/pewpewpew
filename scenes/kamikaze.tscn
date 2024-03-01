@@ -1,19 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://dbyt3bp4cnyr7"]
 
 [ext_resource type="Script" path="res://scripts/kamikaze.gd" id="1_7wbsq"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tqvku"]
-size = Vector2(25, 24)
+[ext_resource type="Texture2D" uid="uid://bkig75aywerkt" path="res://assets/kamikaze.svg" id="2_ais63"]
 
 [node name="Kamikaze" type="CharacterBody2D"]
 collision_layer = 4
 script = ExtResource("1_7wbsq")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 25.0
-offset_bottom = 25.0
-color = Color(1, 0.447059, 0.329412, 1)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.132275, 0.126984)
+texture = ExtResource("2_ais63")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(12.5, 13)
-shape = SubResource("RectangleShape2D_tqvku")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2(-12.5083, -13.0122)
+polygon = PackedVector2Array(1.04993, 24.5621, 12.3281, 2.24978, 23.3668, 24.5621)
