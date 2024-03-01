@@ -1,10 +1,10 @@
 extends CharacterBody2D
 
-const max_speed = 300
-const acceleration = 1000
-const friction = 1000
+const max_speed : int = 300
+const acceleration : int = 1000
+const friction : int = 1000
 
-var input = Vector2.ZERO
+var input : Vector2 = Vector2.ZERO
 
 
 func _physics_process(delta):
