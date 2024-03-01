@@ -1,6 +1,4 @@
-extends CharacterBody2D
-
-class_name Enemy
+class_name Enemy extends CharacterBody2D
 
 var health : int = 500
 var target : Vector2 = Vector2.ZERO

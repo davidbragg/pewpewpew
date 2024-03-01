@@ -1,6 +1,4 @@
-extends Enemy
-
-class_name Kamikaze
+class_name Kamikaze extends Enemy
 
 const IDLE_DIRECTION : Vector2 = Vector2(0, 1)
 const IDLE_ACCELERATION : int = 2000
