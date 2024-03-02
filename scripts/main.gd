@@ -6,10 +6,12 @@ class_name Main extends Node2D
 @export var hunter_scene : PackedScene
 @export var kamikaze_max : int = 3
 @export var kamikaze_increase : int = 3
-@export var player_spawn_position : Vector2 = Vector2(225, 700)
+@export var player_spawn_position : Vector2 = Vector2(225, 900)
 
 var spawn_kamikaze : bool = false
 var kamikaze_count : int = 0
+
+@onready var play_boundary_collider = $Play_Boundary.get_child(0)
 
 func _ready():
 	GlobalState.game_state = GlobalState.TITLE
@@ -17,17 +19,23 @@ func _ready():
 func _process(_delta):
 	match GlobalState.game_state:
 		GlobalState.TITLE:
-			GlobalState.game_state = GlobalState.SPAWNING
-		GlobalState.SPAWNING:
-			if Input.is_action_just_pressed("spawn"):
+			GlobalState.game_state = GlobalState.RESET
+		GlobalState.RESET:
+			if Input.is_action_just_pressed("shoot"):
+				$StartText.visible = false
+				$ReadyText.visible = true
+				GlobalState.game_state = GlobalState.SPAWNING
 				add_player()
-				start_gameplay()
+		GlobalState.PLAYSTART:
+			start_gameplay()
 		GlobalState.GAMEPLAY:
 			pass
 		GlobalState.PLAYERDEATH:
 			stop_gameplay()
 		GlobalState.GAMEOVER:
-			pass
+			GlobalState.player_lives = 3
+			GlobalState.game_state = GlobalState.TITLE
+
 
 ### Kamikaze Spawn and Control ###
 
@@ -64,12 +72,20 @@ func add_player():
 #################################
 
 func stop_gameplay():
-	GlobalState.game_state = GlobalState.SPAWNING
+	play_boundary_collider.disabled = true
 	$KamikazeTimer.stop()
 	$KamikazeCooldownTimer.stop()
+
+	if GlobalState.player_lives <= 0:
+		GlobalState.game_state = GlobalState.GAMEOVER
+	else:
+		GlobalState.game_state = GlobalState.RESET
+		$StartText.visible = true
 
 
 func start_gameplay():
 	GlobalState.game_state = GlobalState.GAMEPLAY
+	play_boundary_collider.disabled = false
 	$KamikazeTimer.start()
 	$KamikazeCooldownTimer.start()
+	$ReadyText.visible = false

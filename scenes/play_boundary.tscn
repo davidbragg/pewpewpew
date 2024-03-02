@@ -5,3 +5,4 @@
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(217, 491)
 polygon = PackedVector2Array(239, -491, 238, 309, -222, 310, -222, -490, 233, -491, 283, -487, 278, -528, -273, -527, -250, 356, 291, 350, 283, -487)
+disabled = true
