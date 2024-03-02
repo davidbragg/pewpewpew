@@ -6,6 +6,7 @@
 size = Vector2(13.5397, 10.9929)
 
 [node name="Player_Projectile" type="CharacterBody2D"]
+collision_layer = 8
 collision_mask = 4
 script = ExtResource("1_gjnds")
 

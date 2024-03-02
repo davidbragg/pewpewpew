@@ -17,3 +17,6 @@ func _process(delta):
 
 	if global_position.y < -50:
 		queue_free()
+
+func despawn():
+	queue_free()

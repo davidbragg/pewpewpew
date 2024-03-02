@@ -14,5 +14,10 @@ enum State {
 
 @onready var player : CharacterBody2D = get_node('/root/Game/Player')
 
+
 func get_target():
-	target = (player.global_position - self.global_position).normalized()
+    target = (player.global_position - self.global_position).normalized()
+
+
+func despawn():
+    queue_free()
