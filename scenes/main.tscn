@@ -17,7 +17,7 @@ script = ExtResource("1_i3dns")
 player_scene = ExtResource("2_mxru2")
 kamikaze_scene = ExtResource("5_wcqs8")
 kamikaze_max = 20
-kamikaze_increase = 0
+kamikaze_increase = 10
 
 [node name="KamikazeTimer" type="Timer" parent="."]
 process_mode = 1
@@ -50,6 +50,23 @@ color = Color(0, 0.110614, 0.0831371, 1)
 
 [node name="Play_Boundary" parent="." instance=ExtResource("2_emvnx")]
 collision_layer = 2
+
+[node name="StartText" type="Label" parent="."]
+offset_left = 152.275
+offset_top = 400.0
+offset_right = 316.275
+offset_bottom = 423.0
+text = "Press Button To Start"
+horizontal_alignment = 1
+
+[node name="ReadyText" type="Label" parent="."]
+visible = false
+offset_left = 151.49
+offset_top = 400.0
+offset_right = 315.489
+offset_bottom = 423.0
+text = "Get Ready"
+horizontal_alignment = 1
 
 [connection signal="timeout" from="KamikazeTimer" to="." method="_on_kamikaze_timer_timeout"]
 [connection signal="timeout" from="KamikazeCooldownTimer" to="." method="_on_kamikaze_cooldown_timer_timeout"]

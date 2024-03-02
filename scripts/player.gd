@@ -14,6 +14,13 @@ signal player_death
 @onready var fire_cooldown_timer : Timer = get_node('Fire_Cooldown')
 
 func _physics_process(delta):
+	if GlobalState.game_state == GlobalState.SPAWNING:
+		velocity = Vector2.UP * 100;
+		move_and_slide()
+		if global_position.y <= 650:
+			GlobalState.game_state = GlobalState.PLAYSTART
+		return
+
 	if Input.is_action_pressed("shoot") and can_fire:
 		add_projectile()
 		fire_cooldown_timer.start()

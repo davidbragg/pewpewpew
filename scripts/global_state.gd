@@ -10,7 +10,9 @@ var game_state : int:
 
 enum {
     TITLE,
+    RESET,
     SPAWNING,
+    PLAYSTART,
     GAMEPLAY,
     PLAYERDEATH,
     GAMEOVER
