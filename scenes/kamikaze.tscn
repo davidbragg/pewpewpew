@@ -1,17 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://dbyt3bp4cnyr7"]
+[gd_scene load_steps=5 format=3 uid="uid://dbyt3bp4cnyr7"]
 
 [ext_resource type="Script" path="res://scripts/kamikaze.gd" id="1_7wbsq"]
 [ext_resource type="Texture2D" uid="uid://bkig75aywerkt" path="res://assets/kamikaze.svg" id="2_ais63"]
+[ext_resource type="Shader" path="res://shaders/kamikaze.gdshader" id="2_d2jpx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_56o0f"]
+shader = ExtResource("2_d2jpx")
+shader_parameter/new_color = Color(0.858824, 0.368627, 0.203922, 1)
 
 [node name="Kamikaze" type="CharacterBody2D"]
 collision_layer = 4
 script = ExtResource("1_7wbsq")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.132275, 0.126984)
-texture = ExtResource("2_ais63")
+metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-visible = false
 position = Vector2(-12.5083, -13.0122)
-polygon = PackedVector2Array(1.04993, 24.5621, 12.3281, 2.24978, 23.3668, 24.5621)
+polygon = PackedVector2Array(0.661317, 24.7144, 12.3101, 1.449, 24.3032, 24.7144)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_56o0f")
+scale = Vector2(0.132275, 0.126984)
+texture = ExtResource("2_ais63")

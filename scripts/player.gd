@@ -1,13 +1,21 @@
 extends CharacterBody2D
 
-const max_speed : int = 300
-const acceleration : int = 1000
-const friction : int = 1000
+@export var projectile_scene : PackedScene
+
+const MAX_SPEED : int = 300
+const ACCELERATION : int = 1500
+const FRICTION : int = 1000
 
 var input : Vector2 = Vector2.ZERO
+var can_fire : bool = true
 
+@onready var fire_cooldown_timer : Timer = get_node('Fire_Cooldown')
 
 func _physics_process(delta):
+	if Input.is_action_pressed("shoot") and can_fire:
+		add_projectile()
+		fire_cooldown_timer.start()
+		can_fire = false
 	player_movement(delta)
 
 
@@ -22,8 +30,16 @@ func player_movement(delta):
 	get_input()
 
 	if input != Vector2.ZERO:
-		velocity = velocity.move_toward(input * max_speed, acceleration * delta)
+		velocity = velocity.move_toward(input * MAX_SPEED, ACCELERATION * delta)
 	else:
-		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 
 	move_and_slide()
+
+func add_projectile():
+	var projectile = projectile_scene.instantiate()
+	projectile.global_position = self.global_position
+	add_sibling(projectile)
+
+func _on_fire_cooldown_timeout():
+	can_fire = true
