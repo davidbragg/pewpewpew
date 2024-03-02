@@ -9,7 +9,6 @@ const FRICTION : int = 1000
 var input : Vector2 = Vector2.ZERO
 var can_fire : bool = true
 
-signal spawn_pressed
 signal player_death
 
 @onready var fire_cooldown_timer : Timer = get_node('Fire_Cooldown')
