@@ -10,6 +10,7 @@ shader_parameter/new_color = Color(0.858824, 0.368627, 0.203922, 1)
 
 [node name="Kamikaze" type="CharacterBody2D"]
 collision_layer = 4
+collision_mask = 9
 script = ExtResource("1_7wbsq")
 metadata/_edit_group_ = true
 
