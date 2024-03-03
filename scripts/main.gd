@@ -19,9 +19,10 @@ func _ready():
 func _process(_delta):
 	match GlobalState.game_state:
 		GlobalState.TITLE:
-			GlobalState.game_state = GlobalState.RESET
+			set_title_screen()
 		GlobalState.RESET:
 			if Input.is_action_just_pressed("shoot"):
+				$TitleText.visible = false
 				$StartText.visible = false
 				$ReadyText.visible = true
 				GlobalState.game_state = GlobalState.SPAWNING
@@ -33,11 +34,11 @@ func _process(_delta):
 		GlobalState.PLAYERDEATH:
 			stop_gameplay()
 		GlobalState.GAMEOVER:
-			GlobalState.player_lives = 3
-			GlobalState.game_state = GlobalState.TITLE
+			reset_to_title()
 
-
+##################################
 ### Kamikaze Spawn and Control ###
+##################################
 
 func _on_kamikaze_cooldown_timer_timeout():
 	spawn_kamikaze = true
@@ -58,8 +59,9 @@ func add_kamikaze():
 		kamikaze_count = 0
 		kamikaze_max += kamikaze_increase
 
-
+####################
 ### Player Spawn ###
+####################
 
 func add_player():
 	var player = player_scene.instantiate()
@@ -70,6 +72,12 @@ func add_player():
 #################################
 ### Gameplay State Management ###
 #################################
+
+func set_title_screen():
+	$TitleText.visible = true
+	$StartText.visible = true
+	GlobalState.game_state = GlobalState.RESET
+
 
 func stop_gameplay():
 	play_boundary_collider.disabled = true
@@ -89,3 +97,10 @@ func start_gameplay():
 	$KamikazeTimer.start()
 	$KamikazeCooldownTimer.start()
 	$ReadyText.visible = false
+
+
+func reset_to_title():
+	$GameOverText.visible = true
+	await get_tree().create_timer(2.0).timeout
+	$GameOverText.visible = false
+	GlobalState.game_state = GlobalState.TITLE

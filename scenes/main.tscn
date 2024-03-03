@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bssj84qd2a7wc"]
+[gd_scene load_steps=8 format=3 uid="uid://bssj84qd2a7wc"]
 
 [ext_resource type="PackedScene" uid="uid://dy8sinaxdks5l" path="res://scenes/background.tscn" id="1_6srfk"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_i3dns"]
@@ -11,6 +11,9 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 5.23185, -32.7907, 0, 0, 0, 0, 415.332, -31.9249)
 }
 point_count = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_bxnqn"]
+font_size = 45
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_i3dns")
@@ -67,6 +70,23 @@ offset_right = 315.489
 offset_bottom = 423.0
 text = "Get Ready"
 horizontal_alignment = 1
+
+[node name="TitleText" type="Label" parent="."]
+offset_left = 89.797
+offset_top = 307.555
+offset_right = 362.797
+offset_bottom = 370.555
+text = "pewpewpew"
+label_settings = SubResource("LabelSettings_bxnqn")
+
+[node name="GameOverText" type="Label" parent="."]
+visible = false
+offset_left = 103.797
+offset_top = 307.799
+offset_right = 376.797
+offset_bottom = 370.799
+text = "Game Over"
+label_settings = SubResource("LabelSettings_bxnqn")
 
 [connection signal="timeout" from="KamikazeTimer" to="." method="_on_kamikaze_timer_timeout"]
 [connection signal="timeout" from="KamikazeCooldownTimer" to="." method="_on_kamikaze_cooldown_timer_timeout"]
