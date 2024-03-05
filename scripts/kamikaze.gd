@@ -5,6 +5,7 @@ const IDLE_ACCELERATION : int = 2000
 const IDLE_MAX_SPEED : int = 200
 
 var has_collided : bool
+var score : int = 100
 
 signal combat_collision
 
@@ -41,3 +42,8 @@ func _process(delta):
 
 func move():
 	has_collided = move_and_slide()
+
+
+func despawn():
+	GlobalState.add_points(score)
+	queue_free()

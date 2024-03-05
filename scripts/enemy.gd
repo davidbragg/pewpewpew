@@ -17,7 +17,3 @@ enum State {
 
 func get_target():
     target = (player.global_position - self.global_position).normalized()
-
-
-func despawn():
-    queue_free()
