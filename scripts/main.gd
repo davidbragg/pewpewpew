@@ -7,14 +7,22 @@ class_name Main extends Node2D
 @export var kamikaze_max : int = 3
 @export var kamikaze_increase : int = 3
 @export var player_spawn_position : Vector2 = Vector2(225, 900)
+@export var lives_sprites : Array[Sprite2D] = []
 
 var spawn_kamikaze : bool = false
 var kamikaze_count : int = 0
+
+var file_path = "user://highscore.save"
 
 @onready var play_boundary_collider = $Play_Boundary.get_child(0)
 
 func _ready():
 	GlobalState.game_state = GlobalState.TITLE
+	var high_score_file = FileAccess.open(file_path, FileAccess.READ)
+	if high_score_file != null:
+		GlobalState.high_score = high_score_file.get_line().to_int()
+		GlobalState.update_high_score()
+		high_score_file.close()
 
 func _process(_delta):
 	match GlobalState.game_state:
@@ -27,6 +35,8 @@ func _process(_delta):
 				$ReadyText.visible = true
 				GlobalState.game_state = GlobalState.SPAWNING
 				add_player()
+		GlobalState.SPAWNING:
+			lives_sprites[GlobalState.player_lives - 1].visible = false
 		GlobalState.PLAYSTART:
 			start_gameplay()
 		GlobalState.GAMEPLAY:
@@ -101,6 +111,13 @@ func start_gameplay():
 
 func reset_to_title():
 	$GameOverText.visible = true
+	var save_score = FileAccess.open(file_path, FileAccess.WRITE)
+	save_score.store_line(str(GlobalState.high_score))
+	save_score.close()
 	await get_tree().create_timer(2.0).timeout
+	GlobalState.reset_game_state()
 	$GameOverText.visible = false
-	GlobalState.game_state = GlobalState.TITLE
+	for i in lives_sprites:
+		i.visible = true
+
+

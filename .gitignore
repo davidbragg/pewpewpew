@@ -1,6 +1,8 @@
 # Godot 4+ specific ignores
 .godot/
 exports/
+export_presets.cfg
+
 
 # VS Code
 .vscode/

@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bssj84qd2a7wc"]
+[gd_scene load_steps=11 format=3 uid="uid://bssj84qd2a7wc"]
 
 [ext_resource type="PackedScene" uid="uid://dy8sinaxdks5l" path="res://scenes/background.tscn" id="1_6srfk"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_i3dns"]
 [ext_resource type="PackedScene" uid="uid://b6elytksonnf" path="res://scenes/play_boundary.tscn" id="2_emvnx"]
 [ext_resource type="PackedScene" uid="uid://b4rebdb6c5p5p" path="res://scenes/player.tscn" id="2_mxru2"]
 [ext_resource type="PackedScene" uid="uid://dbyt3bp4cnyr7" path="res://scenes/kamikaze.tscn" id="5_wcqs8"]
+[ext_resource type="Texture2D" uid="uid://cxvicixjac8ub" path="res://assets/player.png" id="6_n0ln6"]
 
 [sub_resource type="Curve2D" id="Curve2D_0ok36"]
 _data = {
@@ -15,12 +16,20 @@ point_count = 2
 [sub_resource type="LabelSettings" id="LabelSettings_bxnqn"]
 font_size = 45
 
-[node name="Game" type="Node2D"]
+[sub_resource type="LabelSettings" id="LabelSettings_ipwr1"]
+font_size = 11
+
+[sub_resource type="LabelSettings" id="LabelSettings_fa4im"]
+font_size = 11
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("lives_sprites")]
 script = ExtResource("1_i3dns")
 player_scene = ExtResource("2_mxru2")
 kamikaze_scene = ExtResource("5_wcqs8")
 kamikaze_max = 20
 kamikaze_increase = 10
+lives_sprites = [NodePath("TextureRect/lives1"), NodePath("TextureRect/lives2"), NodePath("TextureRect/lives3")]
+metadata/_edit_horizontal_guides_ = [49.9938]
 
 [node name="KamikazeTimer" type="Timer" parent="."]
 process_mode = 1
@@ -87,6 +96,66 @@ offset_right = 376.797
 offset_bottom = 370.799
 text = "Game Over"
 label_settings = SubResource("LabelSettings_bxnqn")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 454.0
+offset_bottom = 129.0
+
+[node name="PlayerScoreLabel" type="Label" parent="TextureRect"]
+offset_left = 12.7136
+offset_top = 5.82705
+offset_right = 52.7136
+offset_bottom = 28.827
+text = "PLAYER"
+label_settings = SubResource("LabelSettings_ipwr1")
+
+[node name="PlayerScoreValue" type="Label" parent="TextureRect"]
+offset_left = 14.2861
+offset_top = 21.1559
+offset_right = 54.2861
+offset_bottom = 44.1559
+text = "0"
+label_settings = SubResource("LabelSettings_ipwr1")
+
+[node name="HighScoreLabel" type="Label" parent="TextureRect"]
+offset_left = 408.011
+offset_top = 5.88651
+offset_right = 439.011
+offset_bottom = 28.8865
+text = "HIGH"
+label_settings = SubResource("LabelSettings_fa4im")
+
+[node name="HighScoreValue" type="Label" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -119.48
+offset_top = -43.1825
+offset_right = -18.4796
+offset_bottom = -20.1825
+grow_horizontal = 0
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_fa4im")
+horizontal_alignment = 2
+
+[node name="lives1" type="Sprite2D" parent="TextureRect"]
+position = Vector2(18.436, 43.6691)
+scale = Vector2(0.391451, 0.391451)
+texture = ExtResource("6_n0ln6")
+
+[node name="lives2" type="Sprite2D" parent="TextureRect"]
+position = Vector2(33.2662, 43.6363)
+scale = Vector2(0.391, 0.391)
+texture = ExtResource("6_n0ln6")
+
+[node name="lives3" type="Sprite2D" parent="TextureRect"]
+position = Vector2(48.1945, 43.6973)
+scale = Vector2(0.391451, 0.391451)
+texture = ExtResource("6_n0ln6")
 
 [connection signal="timeout" from="KamikazeTimer" to="." method="_on_kamikaze_timer_timeout"]
 [connection signal="timeout" from="KamikazeCooldownTimer" to="." method="_on_kamikaze_cooldown_timer_timeout"]
