@@ -8,6 +8,7 @@ var state : State = State.SPAWNING
 
 enum State {
     SPAWNING,
+    IDLE,
     TARGETING,
     ATTACKING
 }

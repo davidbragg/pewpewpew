@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbyt3bp4cnyr7"]
+
+[ext_resource type="Script" path="res://scripts/floater.gd" id="1_o4xfv"]
+[ext_resource type="PackedScene" uid="uid://d3vodh36nuu1f" path="res://scenes/enemy_projectile.tscn" id="2_q051b"]
+[ext_resource type="Texture2D" uid="uid://b8nvtpou561lf" path="res://assets/floater.svg" id="3_e0ygl"]
+
+[node name="Floater" type="CharacterBody2D"]
+z_index = 10
+scale = Vector2(0.685, 0.685)
+collision_layer = 4
+collision_mask = 9
+script = ExtResource("1_o4xfv")
+projectile_scene = ExtResource("2_q051b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-0.0433197, -0.121807)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_e0ygl")
+
+[node name="FireCoolDown" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0.046517, 21.5516, -23.8247, -10.4188, -18.5519, -21.9717, 18.2222, -21.5616, 23.4915, -10.4188)
+
+[connection signal="timeout" from="FireCoolDown" to="." method="_on_fire_cool_down_timeout"]
