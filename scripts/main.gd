@@ -74,7 +74,6 @@ func add_kamikaze():
 		kamikaze_max += kamikaze_increase
 
 func _on_floater_cool_down_timer_timeout():
-	print("timed out")
 	var floater = floater_scene.instantiate()
 	add_child(floater)
 

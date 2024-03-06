@@ -14,6 +14,9 @@ func _process(delta):
 	if move_and_slide():
 		emit_signal("combat_collision", GlobalMessaging.combat_collision(self, get_last_slide_collision().get_collider()))
 
+	if global_position.y > get_viewport_rect().size.y + 50:
+		queue_free()
+
 
 func despawn():
 	queue_free()
