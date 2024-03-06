@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3vodh36nuu1f"]
+
+[ext_resource type="Script" path="res://scripts/enemy_projectile.gd" id="1_831sl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_76460"]
+size = Vector2(10, 10)
+
+[node name="EnemyProjectile" type="CharacterBody2D"]
+z_index = 9
+z_as_relative = false
+collision_layer = 16
+script = ExtResource("1_831sl")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+color = Color(1, 0.862745, 0.858824, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_76460")

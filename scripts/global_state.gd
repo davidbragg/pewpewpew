@@ -10,6 +10,7 @@ var score : int = 0 :
             update_high_score()
 var high_score : int = 0
 var game_state : int
+var floater_spawn_side : bool = true
 
 enum {
 	TITLE,
@@ -21,8 +22,8 @@ enum {
 	GAMEOVER
 }
 
-@onready var player_score_label = get_node('/root/Game/TextureRect/PlayerScoreValue')
-@onready var high_score_label = get_node('/root/Game/TextureRect/HighScoreValue')
+@onready var player_score_label = get_node('/root/Game/UIRect/PlayerScoreValue')
+@onready var high_score_label = get_node('/root/Game/UIRect/HighScoreValue')
 
 func add_points(points : int):
     score += points

@@ -14,9 +14,12 @@ var kamikaze_count : int = 0
 
 var file_path = "user://highscore.save"
 
+
+
 @onready var play_boundary_collider = $Play_Boundary.get_child(0)
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	GlobalState.game_state = GlobalState.TITLE
 	var high_score_file = FileAccess.open(file_path, FileAccess.READ)
 	if high_score_file != null:
@@ -46,6 +49,7 @@ func _process(_delta):
 		GlobalState.GAMEOVER:
 			reset_to_title()
 
+
 ##################################
 ### Kamikaze Spawn and Control ###
 ##################################
@@ -68,6 +72,12 @@ func add_kamikaze():
 		spawn_kamikaze = false
 		kamikaze_count = 0
 		kamikaze_max += kamikaze_increase
+
+func _on_floater_cool_down_timer_timeout():
+	print("timed out")
+	var floater = floater_scene.instantiate()
+	add_child(floater)
+
 
 ####################
 ### Player Spawn ###
@@ -106,6 +116,7 @@ func start_gameplay():
 	play_boundary_collider.disabled = false
 	$KamikazeTimer.start()
 	$KamikazeCooldownTimer.start()
+	$FloaterCoolDownTimer.start()
 	$ReadyText.visible = false
 
 

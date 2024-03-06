@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="50mm"
+   height="50mm"
+   viewBox="0 0 50 50"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)"
+   sodipodi:docname="floater.svg.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="4.1798822"
+     inkscape:cx="183.73724"
+     inkscape:cy="131.2238"
+     inkscape:window-width="2560"
+     inkscape:window-height="1379"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <circle
+       id="path1"
+       style="fill:#1a1a1a;stroke:#000000;stroke-width:0.264583"
+       cx="40.918396"
+       cy="102.26344"
+       r="0.033725541" />
+    <g
+       id="g3"
+       transform="matrix(0.38188052,0,0,0.657428,-4.5682583,-39.887021)">
+      <path
+         style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ff9955;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000;stop-opacity:1"
+         d="M 77.630979,69.763191 34.967603,69.634496 22.736814,84.831323 77.449069,127.76209 Z"
+         id="path2"
+         sodipodi:nodetypes="ccccc" />
+      <use
+         x="0"
+         y="0"
+         xlink:href="#path2"
+         id="use3"
+         transform="matrix(-1,0,0,1,154.85607,0)" />
+    </g>
+  </g>
+</svg>
