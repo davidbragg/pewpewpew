@@ -1,22 +1,14 @@
-extends CharacterBody2D
+extends Entity
 
 const MAX_SPEED : int = 600
 const ACCELERATION : int = 10000
-
-var collision_data : bool
-
+const DIRECTION : Vector2 = Vector2.UP
 
 func _process(delta):
-	if get_slide_collision_count() > 0:
-		queue_free()
+	velocity = velocity.move_toward(DIRECTION * MAX_SPEED, ACCELERATION * delta)
 
-	var direction : Vector2 = Vector2.UP
-	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
-
-	move_and_slide()
+	if move_and_slide():
+		register_combat_collision()
 
 	if global_position.y < -50:
-		queue_free()
-
-func despawn():
-	queue_free()
+		despawn()

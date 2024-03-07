@@ -3,6 +3,8 @@
 exports/
 export_presets.cfg
 
-
 # VS Code
 .vscode/
+
+# My dumb shit
+captures/

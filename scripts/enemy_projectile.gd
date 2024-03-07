@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Entity
 
 const MAX_SPEED : int = 250
 const ACCELERATION : int = 1000
@@ -12,11 +12,7 @@ func _process(delta):
 	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 
 	if move_and_slide():
-		emit_signal("combat_collision", GlobalMessaging.combat_collision(self, get_last_slide_collision().get_collider()))
+		register_combat_collision()
 
 	if global_position.y > get_viewport_rect().size.y + 50:
 		queue_free()
-
-
-func despawn():
-	queue_free()
