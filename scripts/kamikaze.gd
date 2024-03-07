@@ -14,7 +14,6 @@ func _ready():
 func _process(delta):
 	if GlobalState.game_state != GlobalState.GAMEPLAY:
 		queue_free()
-		return
 
 	match state:
 		State.SPAWNING:
