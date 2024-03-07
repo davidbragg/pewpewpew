@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Entity
 
 @export var projectile_scene : PackedScene
 
@@ -7,7 +7,9 @@ const ACCELERATION : int = 1500
 const FRICTION : int = 1000
 
 var input : Vector2 = Vector2.ZERO
+
 var can_fire : bool = true
+var has_collided : bool = false
 
 signal player_death
 
@@ -15,17 +17,18 @@ signal player_death
 
 func _physics_process(delta):
 	if GlobalState.game_state == GlobalState.SPAWNING:
-		velocity = Vector2.UP * 100;
-		move_and_slide()
-		if global_position.y <= 650:
-			GlobalState.game_state = GlobalState.PLAYSTART
+		player_spawn()
 		return
 
 	if Input.is_action_pressed("shoot") and can_fire:
 		add_projectile()
 		fire_cooldown_timer.start()
 		can_fire = false
+
 	player_movement(delta)
+
+	if has_collided:
+		register_combat_collision()
 
 
 func get_input():
@@ -42,7 +45,14 @@ func player_movement(delta):
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 
+	has_collided = move_and_slide()
+
+
+func player_spawn():
+	velocity = Vector2.UP * 100;
 	move_and_slide()
+	if global_position.y <= 650:
+		GlobalState.game_state = GlobalState.PLAYSTART
 
 
 func add_projectile():

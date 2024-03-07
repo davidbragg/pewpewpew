@@ -4,11 +4,9 @@ class_name Floater extends Enemy
 
 var target_position : Vector2
 var deceleration_radius : int = 100
-var min_speed : int = 10
-var spawn_position : Vector2
 var y_spawn_range : int = randi_range(70, 150)
 var x_spawn_left : int = -50
-var x_spawn_right : int = 500
+@onready var x_spawn_right : int = get_viewport_rect().size.x + 50
 var collision_count : int = 0
 var score : int = 1000
 
@@ -50,17 +48,10 @@ func _process(delta):
 			state = State.IDLE
 
 	if move_and_slide():
-		var last_collision_object = get_last_slide_collision().get_collider()
-		if last_collision_object.name == "Player":
-			emit_signal("combat_collision", GlobalMessaging.combat_collision(self, last_collision_object))
-
-		collision_count += 1
+		register_combat_collision()
 
 	if global_position.y > get_viewport_rect().size.y + 50:
 		queue_free()
-
-	if collision_count >= 3:
-		despawn()
 
 
 func add_projectiles():
@@ -74,8 +65,10 @@ func add_projectiles():
 
 
 func despawn():
-	GlobalState.add_points(score)
-	queue_free()
+	collision_count += 1
+	if collision_count >= 4:
+		GlobalState.add_points(score)
+		queue_free()
 
 
 func _on_fire_cool_down_timeout():

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dak23h3d7xsic" path="res://scenes/player_projectile.tscn" id="2_t3tdt"]
 
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 3
+collision_mask = 22
 script = ExtResource("1_iaerw")
 projectile_scene = ExtResource("2_t3tdt")
 
