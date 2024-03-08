@@ -14,8 +14,6 @@ var kamikaze_count : int = 0
 
 var file_path = "user://highscore.save"
 
-
-
 @onready var play_boundary_collider = $Play_Boundary.get_child(0)
 
 func _ready():
@@ -50,6 +48,7 @@ func _process(_delta):
 			reset_to_title()
 
 
+
 ##################################
 ### Kamikaze Spawn and Control ###
 ##################################
@@ -62,20 +61,28 @@ func _on_kamikaze_timer_timeout():
 		add_kamikaze()
 
 func add_kamikaze():
-	var enemy = kamikaze_scene.instantiate()
-	var kamikaze_spawn_location = $KamikazeSpawn/KamikazeSpawnLocation
-	kamikaze_spawn_location.progress_ratio = randf()
-	enemy.position = kamikaze_spawn_location.position
-	add_child(enemy)
-	kamikaze_count += 1
-	if kamikaze_count >= kamikaze_max:
-		spawn_kamikaze = false
-		kamikaze_count = 0
-		kamikaze_max += kamikaze_increase
+	if !GlobalState.debug:
+		var enemy = kamikaze_scene.instantiate()
+		var kamikaze_spawn_location = $KamikazeSpawn/KamikazeSpawnLocation
+		kamikaze_spawn_location.progress_ratio = randf()
+		enemy.position = kamikaze_spawn_location.position
+		add_child(enemy)
+		kamikaze_count += 1
+		if kamikaze_count >= kamikaze_max:
+			spawn_kamikaze = false
+			kamikaze_count = 0
+			kamikaze_max += kamikaze_increase
 
 func _on_floater_cool_down_timer_timeout():
-	var floater = floater_scene.instantiate()
-	add_child(floater)
+	if !GlobalState.debug:
+		var floater = floater_scene.instantiate()
+		add_child(floater)
+
+
+func _on_hunter_cool_down_timer_timeout():
+	var hunter = hunter_scene.instantiate()
+	hunter.global_position = Vector2(randf_range(50, get_viewport_rect().size.x -50), -50)
+	add_child(hunter)
 
 
 ####################
@@ -102,6 +109,8 @@ func stop_gameplay():
 	play_boundary_collider.disabled = true
 	$KamikazeTimer.stop()
 	$KamikazeCooldownTimer.stop()
+	$FloaterCoolDownTimer.stop()
+	$HunterCoolDownTimer.stop()
 
 	if GlobalState.player_lives <= 0:
 		GlobalState.game_state = GlobalState.GAMEOVER
@@ -116,6 +125,7 @@ func start_gameplay():
 	$KamikazeTimer.start()
 	$KamikazeCooldownTimer.start()
 	$FloaterCoolDownTimer.start()
+	$HunterCoolDownTimer.start()
 	$ReadyText.visible = false
 
 
@@ -129,5 +139,6 @@ func reset_to_title():
 	$GameOverText.visible = false
 	for i in lives_sprites:
 		i.visible = true
+
 
 

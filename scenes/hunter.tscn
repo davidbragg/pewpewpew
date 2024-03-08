@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://oaywxkjih0yv"]
+
+[ext_resource type="Script" path="res://scripts/hunter.gd" id="1_iseq4"]
+[ext_resource type="PackedScene" uid="uid://d3vodh36nuu1f" path="res://scenes/enemy_projectile.tscn" id="2_j388x"]
+[ext_resource type="Texture2D" uid="uid://p0445nibjos2" path="res://assets/hunter.svg" id="3_62vpj"]
+
+[node name="Hunter" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 9
+script = ExtResource("1_iseq4")
+projectile_scene = ExtResource("2_j388x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-0.0707873, -2.10937)
+scale = Vector2(0.178309, 0.147851)
+texture = ExtResource("3_62vpj")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-4.71766, 7.06445, -16.0775, -11.2899, -10.7696, -9.15681, 10.5611, -9.05759, 15.7697, -11.0915, 4.65793, 6.81642, -0.104275, 2.15343)

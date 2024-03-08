@@ -10,5 +10,5 @@ func _process(delta):
 	if move_and_slide():
 		register_combat_collision()
 
-	if global_position.y < -50:
+	if global_position.y < -0:
 		despawn()
