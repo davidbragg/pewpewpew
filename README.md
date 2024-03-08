@@ -11,11 +11,15 @@ This is not a full game, but an exercise to get experience with Godot. See purpo
 
 Single level with endless wave of enemies. Player gets three lives to attempt for a high score.
 
-### known bugs & limitations
+### known bugs
 
 None currently, though the game is very limited and there's likely something creeping under the surface that I haven't seen yet.
 
+### limitations
+
 The code is definitely chunky. Approaches improved towards the end, but aren't always reflected in old parts of the code. It could definitely be refactored and cleaned up, but this is as far as I'm taking this project.
+
+Some simple UI clean up, sounds, music, and simple death animations would go a long way to cleaning up the presentation/experience.
 
 ### purpose
 
