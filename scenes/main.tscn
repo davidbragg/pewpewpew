@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bssj84qd2a7wc"]
+[gd_scene load_steps=13 format=3 uid="uid://bssj84qd2a7wc"]
 
 [ext_resource type="PackedScene" uid="uid://dy8sinaxdks5l" path="res://scenes/background.tscn" id="1_6srfk"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_i3dns"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dbyt3bp4cnyr7" path="res://scenes/floater.tscn" id="4_ne8kj"]
 [ext_resource type="PackedScene" uid="uid://ba8n4cw1gve42" path="res://scenes/kamikaze.tscn" id="5_wcqs8"]
 [ext_resource type="Texture2D" uid="uid://cxvicixjac8ub" path="res://assets/player.png" id="6_n0ln6"]
+[ext_resource type="PackedScene" uid="uid://oaywxkjih0yv" path="res://scenes/hunter.tscn" id="8_bwhhk"]
 
 [sub_resource type="Curve2D" id="Curve2D_0ok36"]
 _data = {
@@ -28,6 +29,7 @@ script = ExtResource("1_i3dns")
 player_scene = ExtResource("2_mxru2")
 kamikaze_scene = ExtResource("5_wcqs8")
 floater_scene = ExtResource("4_ne8kj")
+hunter_scene = ExtResource("8_bwhhk")
 kamikaze_max = 5
 kamikaze_increase = 1
 lives_sprites = [NodePath("UIRect/lives1"), NodePath("UIRect/lives2"), NodePath("UIRect/lives3")]
@@ -43,6 +45,8 @@ wait_time = 2.0
 
 [node name="FloaterCoolDownTimer" type="Timer" parent="."]
 wait_time = 5.0
+
+[node name="HunterCoolDownTimer" type="Timer" parent="."]
 
 [node name="KamikazeSpawn" type="Path2D" parent="."]
 position = Vector2(31.9049, 0)
@@ -168,3 +172,4 @@ texture = ExtResource("6_n0ln6")
 [connection signal="timeout" from="KamikazeTimer" to="." method="_on_kamikaze_timer_timeout"]
 [connection signal="timeout" from="KamikazeCooldownTimer" to="." method="_on_kamikaze_cooldown_timer_timeout"]
 [connection signal="timeout" from="FloaterCoolDownTimer" to="." method="_on_floater_cool_down_timer_timeout"]
+[connection signal="timeout" from="HunterCoolDownTimer" to="." method="_on_hunter_cool_down_timer_timeout"]

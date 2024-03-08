@@ -1,5 +1,7 @@
 class_name Enemy extends Entity
 
+@export var projectile_scene : PackedScene
+
 var health : int = 500
 var target : Vector2 = Vector2.ZERO
 var max_speed : int = 400
@@ -17,4 +19,5 @@ enum State {
 
 
 func get_target():
-    target = (player.global_position - self.global_position).normalized()
+    if player != null:
+        target = (player.global_position - self.global_position).normalized()

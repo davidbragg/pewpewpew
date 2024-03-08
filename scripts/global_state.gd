@@ -1,5 +1,7 @@
 extends Node
 
+var debug : bool = false
+
 var player_lives : int = 3
 var score : int = 0 :
     set(value):

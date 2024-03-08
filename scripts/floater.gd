@@ -1,7 +1,5 @@
 class_name Floater extends Enemy
 
-@export var projectile_scene : PackedScene
-
 var target_position : Vector2
 var deceleration_radius : int = 100
 var y_spawn_range : int = randi_range(70, 150)
