@@ -9,7 +9,7 @@ This is not a full game, but an exercise to get experience with Godot. See purpo
 * move (WASD or controller analog left stick)
 * shoot (space or controller A (Xbox)/X (PS))
 
-Single level with endless wave of enemies. Player gets three lives to attempt for a high score. Waves
+Single level with endless wave of enemies. Player gets three lives to attempt for a high score.
 
 ### known bugs & limitations
 
