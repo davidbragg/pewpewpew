@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dtfyvcvhm8cww"]
 
-[ext_resource type="Texture2D" uid="uid://cxvicixjac8ub" path="res://assets/player.png" id="1_3n5ew"]
+[ext_resource type="Texture2D" uid="uid://dq2yvqrtmr1a0" path="res://assets/player.svg" id="1_eh2n6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ipwr1"]
 font_size = 11
@@ -58,15 +58,15 @@ horizontal_alignment = 2
 
 [node name="lives1" type="Sprite2D" parent="."]
 position = Vector2(18.436, 43.6691)
-scale = Vector2(0.391451, 0.391451)
-texture = ExtResource("1_3n5ew")
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("1_eh2n6")
 
 [node name="lives2" type="Sprite2D" parent="."]
 position = Vector2(33.2662, 43.6363)
-scale = Vector2(0.391, 0.391)
-texture = ExtResource("1_3n5ew")
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("1_eh2n6")
 
 [node name="lives3" type="Sprite2D" parent="."]
 position = Vector2(48.1945, 43.6973)
-scale = Vector2(0.391451, 0.391451)
-texture = ExtResource("1_3n5ew")
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("1_eh2n6")

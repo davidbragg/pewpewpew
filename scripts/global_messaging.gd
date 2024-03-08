@@ -1,10 +1,8 @@
 extends Node
 
-
 func combat_collision(sender: Object, collider: Object):
 	if collider.name == "Play_Boundary":
 		return
-
 	sender.despawn()
 	collider.despawn()
 

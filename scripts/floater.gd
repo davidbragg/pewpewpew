@@ -11,13 +11,12 @@ var score : int = 1000
 func _ready():
 	acceleration = 450
 	max_speed = 1000
-	if GlobalState.floater_spawn_side:
+	if randf() > 0.5:
 		global_position = Vector2(x_spawn_left, y_spawn_range)
 		target_position = Vector2(randi_range(100, 200), global_position.y)
 	else:
 		global_position = Vector2(x_spawn_right, y_spawn_range)
 		target_position = Vector2(randi_range(250, 350), global_position.y)
-	GlobalState.floater_spawn_side = !GlobalState.floater_spawn_side
 
 
 func _process(delta):

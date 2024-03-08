@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://p0445nibjos2" path="res://assets/hunter.svg" id="3_62vpj"]
 
 [node name="Hunter" type="CharacterBody2D"]
+z_index = 10
+scale = Vector2(1.1, 1.1)
 collision_layer = 4
 collision_mask = 9
 script = ExtResource("1_iseq4")

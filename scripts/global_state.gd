@@ -12,7 +12,6 @@ var score : int = 0 :
             update_high_score()
 var high_score : int = 0
 var game_state : int
-var floater_spawn_side : bool = true
 
 enum {
 	TITLE,
