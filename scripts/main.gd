@@ -14,7 +14,13 @@ var kamikaze_count : int = 0
 
 var file_path = "user://highscore.save"
 
-@onready var play_boundary_collider = $Play_Boundary.get_child(0)
+@onready var play_boundary_collider : CollisionPolygon2D = $Play_Boundary.get_child(0)
+@onready var timers : Dictionary = {
+	"kamikaze_spawn_limit": $KamikazeTimer,
+	"kamikaze_cooldown": $KamikazeCooldownTimer,
+	"floater_cooldown": $FloaterCoolDownTimer,
+	"hunter_cooldown": $HunterCoolDownTimer
+}
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -48,11 +54,9 @@ func _process(_delta):
 			reset_to_title()
 
 
-
 ##################################
-### Kamikaze Spawn and Control ###
+### Enemy Spawn and Control ###
 ##################################
-
 func _on_kamikaze_cooldown_timer_timeout():
 	spawn_kamikaze = true
 
@@ -107,10 +111,8 @@ func set_title_screen():
 
 func stop_gameplay():
 	play_boundary_collider.disabled = true
-	$KamikazeTimer.stop()
-	$KamikazeCooldownTimer.stop()
-	$FloaterCoolDownTimer.stop()
-	$HunterCoolDownTimer.stop()
+	for key in timers.keys():
+		timers[key].stop()
 
 	if GlobalState.player_lives <= 0:
 		GlobalState.game_state = GlobalState.GAMEOVER
@@ -122,10 +124,8 @@ func stop_gameplay():
 func start_gameplay():
 	GlobalState.game_state = GlobalState.GAMEPLAY
 	play_boundary_collider.disabled = false
-	$KamikazeTimer.start()
-	$KamikazeCooldownTimer.start()
-	$FloaterCoolDownTimer.start()
-	$HunterCoolDownTimer.start()
+	for key in timers.keys():
+		timers[key].start()
 	$ReadyText.visible = false
 
 

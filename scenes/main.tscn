@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b4rebdb6c5p5p" path="res://scenes/player.tscn" id="2_mxru2"]
 [ext_resource type="PackedScene" uid="uid://dbyt3bp4cnyr7" path="res://scenes/floater.tscn" id="4_ne8kj"]
 [ext_resource type="PackedScene" uid="uid://ba8n4cw1gve42" path="res://scenes/kamikaze.tscn" id="5_wcqs8"]
-[ext_resource type="Texture2D" uid="uid://cxvicixjac8ub" path="res://assets/player.png" id="6_n0ln6"]
+[ext_resource type="Texture2D" uid="uid://dq2yvqrtmr1a0" path="res://assets/player.svg" id="8_7s5pq"]
 [ext_resource type="PackedScene" uid="uid://oaywxkjih0yv" path="res://scenes/hunter.tscn" id="8_bwhhk"]
 
 [sub_resource type="Curve2D" id="Curve2D_0ok36"]
@@ -156,18 +156,18 @@ horizontal_alignment = 2
 
 [node name="lives1" type="Sprite2D" parent="UIRect"]
 position = Vector2(18.436, 43.6691)
-scale = Vector2(0.391451, 0.391451)
-texture = ExtResource("6_n0ln6")
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("8_7s5pq")
 
 [node name="lives2" type="Sprite2D" parent="UIRect"]
 position = Vector2(33.2662, 43.6363)
-scale = Vector2(0.391, 0.391)
-texture = ExtResource("6_n0ln6")
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("8_7s5pq")
 
 [node name="lives3" type="Sprite2D" parent="UIRect"]
 position = Vector2(48.1945, 43.6973)
-scale = Vector2(0.391451, 0.391451)
-texture = ExtResource("6_n0ln6")
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("8_7s5pq")
 
 [connection signal="timeout" from="KamikazeTimer" to="." method="_on_kamikaze_timer_timeout"]
 [connection signal="timeout" from="KamikazeCooldownTimer" to="." method="_on_kamikaze_cooldown_timer_timeout"]

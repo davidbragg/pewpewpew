@@ -2,8 +2,8 @@ extends Entity
 
 @export var projectile_scene : PackedScene
 
-const MAX_SPEED : int = 300
-const ACCELERATION : int = 1500
+const MAX_SPEED : int = 350
+const ACCELERATION : int = 2000
 const FRICTION : int = 1000
 
 var input : Vector2 = Vector2.ZERO
@@ -34,7 +34,6 @@ func _physics_process(delta):
 func get_input():
 	input.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	input.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-	input = input.normalized()
 
 
 func player_movement(delta):
