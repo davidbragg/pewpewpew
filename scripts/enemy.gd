@@ -12,7 +12,8 @@ enum State {
     SPAWNING,
     IDLE,
     TARGETING,
-    ATTACKING
+    ATTACKING,
+    EXITING
 }
 
 @onready var player : CharacterBody2D = get_node('/root/Game/Player')
