@@ -32,15 +32,17 @@ func _physics_process(delta):
 
 
 func get_input():
-	input.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	input.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+	input = Vector2(
+		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+		Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+	)
 
 
 func player_movement(delta):
 	get_input()
 
-	if input != Vector2.ZERO:
-		velocity = velocity.move_toward(input * MAX_SPEED, ACCELERATION * delta)
+	if input.length() > 0.1:
+		velocity = input.normalized() * MAX_SPEED
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 
