@@ -30,8 +30,6 @@ player_scene = ExtResource("2_mxru2")
 kamikaze_scene = ExtResource("5_wcqs8")
 floater_scene = ExtResource("4_ne8kj")
 hunter_scene = ExtResource("8_bwhhk")
-kamikaze_max = 5
-kamikaze_increase = 1
 lives_sprites = [NodePath("UIRect/lives1"), NodePath("UIRect/lives2"), NodePath("UIRect/lives3")]
 metadata/_edit_horizontal_guides_ = [49.9938]
 
@@ -47,6 +45,9 @@ wait_time = 2.0
 wait_time = 5.0
 
 [node name="HunterCoolDownTimer" type="Timer" parent="."]
+
+[node name="DifficultyRamp" type="Timer" parent="."]
+wait_time = 7.0
 
 [node name="KamikazeSpawn" type="Path2D" parent="."]
 position = Vector2(31.9049, 0)
@@ -173,3 +174,4 @@ texture = ExtResource("8_7s5pq")
 [connection signal="timeout" from="KamikazeCooldownTimer" to="." method="_on_kamikaze_cooldown_timer_timeout"]
 [connection signal="timeout" from="FloaterCoolDownTimer" to="." method="_on_floater_cool_down_timer_timeout"]
 [connection signal="timeout" from="HunterCoolDownTimer" to="." method="_on_hunter_cool_down_timer_timeout"]
+[connection signal="timeout" from="DifficultyRamp" to="." method="_on_difficulty_ramp_timeout"]

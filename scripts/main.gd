@@ -4,8 +4,7 @@ class_name Main extends Node2D
 @export var kamikaze_scene : PackedScene
 @export var floater_scene : PackedScene
 @export var hunter_scene : PackedScene
-@export var kamikaze_max : int = 3
-@export var kamikaze_increase : int = 3
+
 @export var player_spawn_position : Vector2 = Vector2(225, 900)
 @export var lives_sprites : Array[Sprite2D] = []
 
@@ -44,6 +43,8 @@ func _process(_delta):
 				add_player()
 		GlobalState.SPAWNING:
 			lives_sprites[GlobalState.player_lives - 1].visible = false
+			for key in timers.keys():
+				timers[key].start(Env.timer_max[key])
 		GlobalState.PLAYSTART:
 			start_gameplay()
 		GlobalState.GAMEPLAY:
@@ -65,35 +66,40 @@ func _on_kamikaze_timer_timeout():
 		add_kamikaze()
 
 func add_kamikaze():
-	if GlobalState.debug:
-		return
-
 	var enemy = kamikaze_scene.instantiate()
 	var kamikaze_spawn_location = $KamikazeSpawn/KamikazeSpawnLocation
 	kamikaze_spawn_location.progress_ratio = randf()
 	enemy.position = kamikaze_spawn_location.position
 	add_child(enemy)
 	kamikaze_count += 1
-	if kamikaze_count >= kamikaze_max:
+	if kamikaze_count >= Env.kamikaze_wave:
 		spawn_kamikaze = false
 		kamikaze_count = 0
-		kamikaze_max += kamikaze_increase
 
 func _on_floater_cool_down_timer_timeout():
-	if GlobalState.debug:
-		return
-
 	var floater = floater_scene.instantiate()
 	add_child(floater)
 
 
 func _on_hunter_cool_down_timer_timeout():
-	if GlobalState.debug:
-		return
-
 	var hunter = hunter_scene.instantiate()
 	hunter.global_position = Vector2(randf_range(50, get_viewport_rect().size.x -50), -50)
 	add_child(hunter)
+
+
+func _on_difficulty_ramp_timeout():
+	if Env.kamikaze_wave < Env.kamikaze_max:
+		Env.kamikaze_wave += Env.kamikaze_increase
+	if timers["kamikaze_spawn_limit"].wait_time > Env.kamikaze_spawn_min:
+		timers["kamikaze_spawn_limit"].wait_time -= 0.02
+	if timers["kamikaze_cooldown"].wait_time > Env.kamikaze_cooldown_min:
+		timers["kamikaze_cooldown"].wait_time -= 0.5
+
+	if timers["floater_cooldown"].wait_time > Env.floater_cooldown_min:
+		timers["floater_cooldown"].wait_time -= 0.5
+
+	if timers["hunter_cooldown"].wait_time > Env.hunter_cooldown_min:
+		timers["hunter_cooldown"].wait_time -= 0.5
 
 
 ####################
@@ -120,6 +126,8 @@ func stop_gameplay():
 	play_boundary_collider.disabled = true
 	for key in timers.keys():
 		timers[key].stop()
+	$DifficultyRamp.stop()
+	Env.kamikaze_wave = Env.kamikaze_wave_start
 
 	if GlobalState.player_lives <= 0:
 		GlobalState.game_state = GlobalState.GAMEOVER
@@ -131,8 +139,8 @@ func stop_gameplay():
 func start_gameplay():
 	GlobalState.game_state = GlobalState.GAMEPLAY
 	play_boundary_collider.disabled = false
-	for key in timers.keys():
-		timers[key].start()
+
+	$DifficultyRamp.start()
 	$ReadyText.visible = false
 
 
