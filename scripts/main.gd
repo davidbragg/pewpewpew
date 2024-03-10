@@ -66,21 +66,19 @@ func _on_kamikaze_timer_timeout():
 		add_kamikaze()
 
 func add_kamikaze():
-	if !GlobalState.debug:
-		var enemy = kamikaze_scene.instantiate()
-		var kamikaze_spawn_location = $KamikazeSpawn/KamikazeSpawnLocation
-		kamikaze_spawn_location.progress_ratio = randf()
-		enemy.position = kamikaze_spawn_location.position
-		add_child(enemy)
-		kamikaze_count += 1
-		if kamikaze_count >= Env.kamikaze_wave:
-			spawn_kamikaze = false
-			kamikaze_count = 0
+	var enemy = kamikaze_scene.instantiate()
+	var kamikaze_spawn_location = $KamikazeSpawn/KamikazeSpawnLocation
+	kamikaze_spawn_location.progress_ratio = randf()
+	enemy.position = kamikaze_spawn_location.position
+	add_child(enemy)
+	kamikaze_count += 1
+	if kamikaze_count >= Env.kamikaze_wave:
+		spawn_kamikaze = false
+		kamikaze_count = 0
 
 func _on_floater_cool_down_timer_timeout():
-	if !GlobalState.debug:
-		var floater = floater_scene.instantiate()
-		add_child(floater)
+	var floater = floater_scene.instantiate()
+	add_child(floater)
 
 
 func _on_hunter_cool_down_timer_timeout():
