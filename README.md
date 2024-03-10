@@ -9,7 +9,9 @@ This is not a full game, but an exercise to get experience with Godot. See purpo
 * move (WASD or controller analog left stick)
 * shoot (space or controller A (Xbox)/X (PS))
 
-Single level with endless wave of enemies. Player gets three lives to attempt for a high score.
+Single level with endless wave of enemies. Waves get progressively more difficult the longer the player survives.
+
+Player gets three lives to attempt for a high score.
 
 ### known bugs
 
@@ -25,5 +27,5 @@ Some simple UI clean up, sounds, music, and simple death animations would go a l
 
 This project was started immediately after the [Pong Clone](https://github.com/davidbragg/pong) and was meant to continue building projects to gain experience with 2D game dev using Godot and GDScript. It is not meant to be a fully featured game.
 
-The project was constrained to a two week, part time development schedule. The feature set was deliberately constrained both to meet the schedule and limit focus primary to game logic. There is no sound, no level design, the UI is barebones, and only the minimum of control is implemented.
+The project was constrained to a two week, part time development schedule. The feature set was deliberately constrained both to meet the schedule and limit focus primarily to game logic. There is no sound, no level design, the UI is barebones, and only the minimum of control is implemented.
 

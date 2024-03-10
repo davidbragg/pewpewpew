@@ -19,6 +19,7 @@ config/icon="res://assets/kamikaze.svg"
 
 GlobalMessaging="*res://scripts/global_messaging.gd"
 GlobalState="*res://scripts/global_state.gd"
+Env="*res://scripts/environment.gd"
 
 [display]
 
