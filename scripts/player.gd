@@ -70,6 +70,6 @@ func _on_fire_cooldown_timeout():
 
 
 func despawn():
-	Env.player_coord = position6
+	Env.player_coord = position
 	emit_signal("player_death", GlobalMessaging.player_death())
 	queue_free()
