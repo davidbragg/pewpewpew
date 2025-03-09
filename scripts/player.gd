@@ -15,6 +15,9 @@ signal player_death
 
 @onready var fire_cooldown_timer : Timer = get_node('Fire_Cooldown')
 
+func _ready() -> void:
+	$AudioListener2D.make_current()
+
 func _physics_process(delta):
 	if GlobalState.game_state == GlobalState.SPAWNING:
 		player_spawn()
@@ -48,7 +51,6 @@ func player_movement(delta):
 
 	has_collided = move_and_slide()
 
-
 func player_spawn():
 	velocity = Vector2.UP * 100;
 	move_and_slide()
@@ -60,6 +62,7 @@ func add_projectile():
 	var projectile = projectile_scene.instantiate()
 	projectile.global_position = self.global_position
 	add_sibling(projectile)
+	$FireAudio.play()
 
 
 func _on_fire_cooldown_timeout():
@@ -67,5 +70,6 @@ func _on_fire_cooldown_timeout():
 
 
 func despawn():
+	Env.player_coord = position6
 	emit_signal("player_death", GlobalMessaging.player_death())
 	queue_free()

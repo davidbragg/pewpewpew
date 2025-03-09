@@ -1,13 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://bssj84qd2a7wc"]
+[gd_scene load_steps=15 format=3 uid="uid://bssj84qd2a7wc"]
 
 [ext_resource type="PackedScene" uid="uid://dy8sinaxdks5l" path="res://scenes/background.tscn" id="1_6srfk"]
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_i3dns"]
+[ext_resource type="Script" uid="uid://k205u44n8ygo" path="res://scripts/main.gd" id="1_i3dns"]
 [ext_resource type="PackedScene" uid="uid://b6elytksonnf" path="res://scenes/play_boundary.tscn" id="2_emvnx"]
 [ext_resource type="PackedScene" uid="uid://b4rebdb6c5p5p" path="res://scenes/player.tscn" id="2_mxru2"]
 [ext_resource type="PackedScene" uid="uid://dbyt3bp4cnyr7" path="res://scenes/floater.tscn" id="4_ne8kj"]
 [ext_resource type="PackedScene" uid="uid://ba8n4cw1gve42" path="res://scenes/kamikaze.tscn" id="5_wcqs8"]
 [ext_resource type="Texture2D" uid="uid://dq2yvqrtmr1a0" path="res://assets/player.svg" id="8_7s5pq"]
 [ext_resource type="PackedScene" uid="uid://oaywxkjih0yv" path="res://scenes/hunter.tscn" id="8_bwhhk"]
+[ext_resource type="AudioStream" uid="uid://bi8lkduw542dh" path="res://assets/audio/player_death.ogg" id="9_85g3d"]
 
 [sub_resource type="Curve2D" id="Curve2D_0ok36"]
 _data = {
@@ -23,6 +24,9 @@ font_size = 11
 
 [sub_resource type="LabelSettings" id="LabelSettings_fa4im"]
 font_size = 11
+
+[sub_resource type="Gradient" id="Gradient_85g3d"]
+colors = PackedColorArray(0.992172, 0, 0, 1, 0.839216, 0.701961, 0, 1)
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("lives_sprites")]
 script = ExtResource("1_i3dns")
@@ -169,6 +173,25 @@ texture = ExtResource("8_7s5pq")
 position = Vector2(48.1945, 43.6973)
 scale = Vector2(0.075, 0.075)
 texture = ExtResource("8_7s5pq")
+
+[node name="PlayerDeathAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_85g3d")
+volume_db = -4.0
+
+[node name="PlayerDeathParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 800
+lifetime = 0.3
+one_shot = true
+speed_scale = 0.5
+randomness = 0.66
+emission_shape = 1
+emission_sphere_radius = 0.01
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 70.71
+initial_velocity_max = 353.54
+color_ramp = SubResource("Gradient_85g3d")
 
 [connection signal="timeout" from="KamikazeTimer" to="." method="_on_kamikaze_timer_timeout"]
 [connection signal="timeout" from="KamikazeCooldownTimer" to="." method="_on_kamikaze_cooldown_timer_timeout"]

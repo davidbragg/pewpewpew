@@ -1,8 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbyt3bp4cnyr7"]
+[gd_scene load_steps=9 format=3 uid="uid://dbyt3bp4cnyr7"]
 
-[ext_resource type="Script" path="res://scripts/floater.gd" id="1_o4xfv"]
+[ext_resource type="Script" uid="uid://cqon5s8v61nkj" path="res://scripts/floater.gd" id="1_o4xfv"]
 [ext_resource type="PackedScene" uid="uid://d3vodh36nuu1f" path="res://scenes/enemy_projectile.tscn" id="2_q051b"]
 [ext_resource type="Texture2D" uid="uid://b8nvtpou561lf" path="res://assets/floater.svg" id="3_e0ygl"]
+[ext_resource type="AudioStream" uid="uid://c8aqh7f72ahr2" path="res://assets/audio/floater_fire.ogg" id="4_js0lp"]
+[ext_resource type="AudioStream" uid="uid://benreolqkhau2" path="res://assets/audio/enemy_death.ogg" id="5_0v24q"]
+[ext_resource type="AudioStream" uid="uid://doxql3q568n6d" path="res://assets/audio/floater_hit.ogg" id="5_03vxn"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0v24q"]
+streams_count = 1
+stream_0/stream = ExtResource("4_js0lp")
+
+[sub_resource type="Gradient" id="Gradient_03vxn"]
+offsets = PackedFloat32Array(0.54, 1)
+colors = PackedColorArray(0.992172, 0.595987, 0.329259, 1, 0.998609, 0.842112, 0.748383, 1)
 
 [node name="Floater" type="CharacterBody2D"]
 z_index = 10
@@ -21,6 +32,35 @@ texture = ExtResource("3_e0ygl")
 wait_time = 2.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(0.046517, 21.5516, -23.8247, -10.4188, -18.5519, -21.9717, 18.2222, -21.5616, 23.4915, -10.4188)
 
+[node name="FireAudio" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_0v24q")
+pitch_scale = 1.03
+
+[node name="HitAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_03vxn")
+
+[node name="DeathAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_0v24q")
+volume_db = -4.0
+
+[node name="ExplosionParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 500
+lifetime = 0.1
+one_shot = true
+speed_scale = 0.5
+randomness = 0.66
+emission_shape = 1
+emission_sphere_radius = 0.01
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 70.71
+initial_velocity_max = 353.54
+color_ramp = SubResource("Gradient_03vxn")
+
 [connection signal="timeout" from="FireCoolDown" to="." method="_on_fire_cool_down_timeout"]
+[connection signal="finished" from="DeathAudio" to="." method="_on_death_audio_finished"]
+[connection signal="finished" from="ExplosionParticles" to="." method="_on_explosion_particles_finished"]

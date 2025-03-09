@@ -124,6 +124,9 @@ func set_title_screen():
 
 func stop_gameplay():
 	play_boundary_collider.disabled = true
+	$PlayerDeathAudio.play()
+	$PlayerDeathParticles.position = Env.player_coord
+	$PlayerDeathParticles.emitting = true
 	for key in timers.keys():
 		timers[key].stop()
 	$DifficultyRamp.stop()
@@ -154,6 +157,3 @@ func reset_to_title():
 	$GameOverText.visible = false
 	for i in lives_sprites:
 		i.visible = true
-
-
-

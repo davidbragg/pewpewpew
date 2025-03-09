@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://dy8sinaxdks5l"]
 
-[ext_resource type="Shader" path="res://shaders/bg2.gdshader" id="1_og12l"]
+[ext_resource type="Shader" uid="uid://bwmhllevu4x0i" path="res://shaders/bg2.gdshader" id="1_og12l"]
 [ext_resource type="Texture2D" uid="uid://crtewfe874sci" path="res://assets/bgloop2.png" id="2_7c23h"]
-[ext_resource type="Shader" path="res://shaders/bg.gdshader" id="3_apytn"]
+[ext_resource type="Shader" uid="uid://bg5gdcw23rph0" path="res://shaders/bg.gdshader" id="3_apytn"]
 [ext_resource type="Texture2D" uid="uid://bp2u6o7sygvjh" path="res://assets/bgloop.png" id="3_gvshd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_taoqw"]

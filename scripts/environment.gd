@@ -1,10 +1,10 @@
 extends Node
 
 var timer_max : Dictionary = {
-    "kamikaze_spawn_limit": 0.3,
-    "kamikaze_cooldown": 5,
-    "floater_cooldown": 9,
-    "hunter_cooldown": 5
+	"kamikaze_spawn_limit": 0.3,
+	"kamikaze_cooldown": 5,
+	"floater_cooldown": 9,
+	"hunter_cooldown": 5
 }
 
 const kamikaze_wave_start : int = 5
@@ -17,3 +17,5 @@ var kamikaze_max : int = 20
 const floater_cooldown_min : int = 4
 
 const hunter_cooldown_min : int = 2
+
+var player_coord: Vector2

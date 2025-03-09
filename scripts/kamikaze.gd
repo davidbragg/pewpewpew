@@ -5,6 +5,8 @@ const IDLE_ACCELERATION : int = 2000
 const IDLE_MAX_SPEED : int = 200
 
 var score : int = 100
+var audio_complete: bool = false
+var particles_complete: bool = false
 
 func _ready():
 	self.rotation = Vector2(-1,0).angle()
@@ -16,6 +18,11 @@ func _process(delta):
 		queue_free()
 
 	match state:
+		State.DEAD:
+			move_and_slide()
+			if audio_complete && particles_complete:
+				queue_free()
+			return
 		State.SPAWNING:
 			if self.global_position.y >= 100:
 				state = State.TARGETING
@@ -25,6 +32,7 @@ func _process(delta):
 			get_target()
 			self.rotation = target.angle() - (self.rotation / 2)
 			state = State.ATTACKING
+			$EngineAudio.play()
 
 		State.ATTACKING:
 			velocity = velocity.move_toward(target * max_speed, acceleration * delta)
@@ -38,4 +46,16 @@ func _process(delta):
 
 func despawn():
 	GlobalState.add_points(score)
-	queue_free()
+	state = State.DEAD
+	$Sprite2D.visible = false
+	$CollisionPolygon2D.disabled = true
+	$EngineAudio.stop()
+	$DeathAudio.play()
+	$ExplosionParticles.emitting = true
+
+
+func _on_death_audio_finished() -> void:
+	audio_complete = true
+
+func _on_explosion_particles_finished() -> void:
+	particles_complete = true

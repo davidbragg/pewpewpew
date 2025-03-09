@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4rebdb6c5p5p"]
+[gd_scene load_steps=6 format=3 uid="uid://b4rebdb6c5p5p"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_iaerw"]
+[ext_resource type="Script" uid="uid://saw67bk5t0ow" path="res://scripts/player.gd" id="1_iaerw"]
 [ext_resource type="PackedScene" uid="uid://dak23h3d7xsic" path="res://scenes/player_projectile.tscn" id="2_t3tdt"]
 [ext_resource type="Texture2D" uid="uid://dq2yvqrtmr1a0" path="res://assets/player.svg" id="4_bvrjh"]
+[ext_resource type="AudioStream" uid="uid://cgebenbqel0e6" path="res://assets/audio/player_fire.ogg" id="4_dqkch"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_dqkch"]
+random_pitch = 1.03
+streams_count = 1
+stream_0/stream = ExtResource("4_dqkch")
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 22
@@ -21,5 +27,10 @@ wait_time = 0.1
 position = Vector2(-0.0628674, 15.497)
 scale = Vector2(0.18362, 0.178023)
 texture = ExtResource("4_bvrjh")
+
+[node name="FireAudio" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_dqkch")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
 
 [connection signal="timeout" from="Fire_Cooldown" to="." method="_on_fire_cooldown_timeout"]

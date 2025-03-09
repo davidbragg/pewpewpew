@@ -7,6 +7,8 @@ var x_spawn_left : int = -50
 @onready var x_spawn_right : int = get_viewport_rect().size.x + 50
 var collision_count : int = 0
 var score : int = 1000
+var audio_complete: bool = false
+var particles_complete: bool = false
 
 func _ready():
 	acceleration = 450
@@ -24,6 +26,10 @@ func _process(delta):
 		queue_free()
 
 	match state:
+		State.DEAD:
+			if audio_complete && particles_complete:
+				queue_free()
+			return
 		State.SPAWNING:
 			var direction = (target_position - global_position).normalized()
 			var distance = global_position.distance_to(target_position)
@@ -41,6 +47,7 @@ func _process(delta):
 			velocity = Vector2.DOWN * 100
 		State.ATTACKING:
 			add_projectiles()
+			$FireAudio.play()
 			velocity = Vector2.UP * 100
 			state = State.IDLE
 
@@ -65,8 +72,20 @@ func despawn():
 	collision_count += 1
 	if collision_count >= 4:
 		GlobalState.add_points(score)
-		queue_free()
-
+		state = State.DEAD
+		$CollisionPolygon2D.disabled = true
+		$Sprite2D.visible = false
+		$ExplosionParticles.emitting = true
+		$DeathAudio.play()
+	else:
+		$HitAudio.play()
 
 func _on_fire_cool_down_timeout():
-	state = State.ATTACKING
+	if state != State.DEAD:
+		state = State.ATTACKING
+
+func _on_death_audio_finished() -> void:
+	audio_complete = true
+
+func _on_explosion_particles_finished() -> void:
+	particles_complete = true

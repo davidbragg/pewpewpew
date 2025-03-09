@@ -1,8 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://oaywxkjih0yv"]
+[gd_scene load_steps=8 format=3 uid="uid://oaywxkjih0yv"]
 
-[ext_resource type="Script" path="res://scripts/hunter.gd" id="1_iseq4"]
+[ext_resource type="Script" uid="uid://rqvm6rh3sil5" path="res://scripts/hunter.gd" id="1_iseq4"]
 [ext_resource type="PackedScene" uid="uid://d3vodh36nuu1f" path="res://scenes/enemy_projectile.tscn" id="2_j388x"]
 [ext_resource type="Texture2D" uid="uid://p0445nibjos2" path="res://assets/hunter.svg" id="3_62vpj"]
+[ext_resource type="AudioStream" uid="uid://tenaylwiysq5" path="res://assets/audio/hunter_fire.ogg" id="4_h7gi6"]
+[ext_resource type="AudioStream" uid="uid://benreolqkhau2" path="res://assets/audio/enemy_death.ogg" id="5_aso1i"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_aso1i"]
+streams_count = 1
+stream_0/stream = ExtResource("4_h7gi6")
+
+[sub_resource type="Gradient" id="Gradient_aso1i"]
+colors = PackedColorArray(0.803922, 0.698039, 0, 1, 0.839216, 0.701961, 0, 1)
 
 [node name="Hunter" type="CharacterBody2D"]
 z_index = 10
@@ -18,4 +27,31 @@ scale = Vector2(0.178309, 0.147851)
 texture = ExtResource("3_62vpj")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(-4.71766, 7.06445, -16.0775, -11.2899, -10.7696, -9.15681, 10.5611, -9.05759, 15.7697, -11.0915, 4.65793, 6.81642, -0.104275, 2.15343)
+
+[node name="FireAudio" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_aso1i")
+pitch_scale = 1.03
+
+[node name="DeathAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_aso1i")
+volume_db = -4.0
+
+[node name="ExplosionParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 500
+lifetime = 0.1
+one_shot = true
+speed_scale = 0.5
+randomness = 0.66
+emission_shape = 1
+emission_sphere_radius = 0.01
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 70.71
+initial_velocity_max = 353.54
+color_ramp = SubResource("Gradient_aso1i")
+
+[connection signal="finished" from="DeathAudio" to="." method="_on_death_audio_finished"]
+[connection signal="finished" from="ExplosionParticles" to="." method="_on_explosion_particles_finished"]

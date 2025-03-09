@@ -1,12 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://ba8n4cw1gve42"]
+[gd_scene load_steps=9 format=3 uid="uid://ba8n4cw1gve42"]
 
-[ext_resource type="Script" path="res://scripts/kamikaze.gd" id="1_7wbsq"]
+[ext_resource type="Script" uid="uid://bigw0lc2vhgky" path="res://scripts/kamikaze.gd" id="1_7wbsq"]
 [ext_resource type="Texture2D" uid="uid://bkig75aywerkt" path="res://assets/kamikaze.svg" id="2_ais63"]
-[ext_resource type="Shader" path="res://shaders/kamikaze.gdshader" id="2_d2jpx"]
+[ext_resource type="Shader" uid="uid://ipb54huqvuwo" path="res://shaders/kamikaze.gdshader" id="2_d2jpx"]
+[ext_resource type="AudioStream" uid="uid://fkahbw52hdw8" path="res://assets/audio/kamikaze_engine.ogg" id="4_2r708"]
+[ext_resource type="AudioStream" uid="uid://benreolqkhau2" path="res://assets/audio/enemy_death.ogg" id="5_cv7uk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_56o0f"]
 shader = ExtResource("2_d2jpx")
 shader_parameter/new_color = Color(0.858824, 0.368627, 0.203922, 1)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_cv7uk"]
+streams_count = 1
+stream_0/stream = ExtResource("4_2r708")
+
+[sub_resource type="Gradient" id="Gradient_cv7uk"]
+colors = PackedColorArray(0.956863, 0.337255, 0.105882, 1, 0.839216, 0.701961, 0, 1)
 
 [node name="Kamikaze" type="CharacterBody2D"]
 collision_layer = 4
@@ -21,3 +30,33 @@ polygon = PackedVector2Array(2.27788, 24.3345, 12.2103, 2.21824, 22.805, 24.2021
 material = SubResource("ShaderMaterial_56o0f")
 scale = Vector2(0.132275, 0.126984)
 texture = ExtResource("2_ais63")
+
+[node name="EngineAudio" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_cv7uk")
+volume_db = -10.0
+pitch_scale = 1.05
+max_distance = 300.0
+attenuation = 4.43828
+panning_strength = 3.0
+
+[node name="DeathAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_cv7uk")
+volume_db = -4.0
+
+[node name="ExplosionParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 500
+lifetime = 0.1
+one_shot = true
+speed_scale = 0.5
+randomness = 0.66
+emission_shape = 1
+emission_sphere_radius = 0.01
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 70.71
+initial_velocity_max = 353.54
+color_ramp = SubResource("Gradient_cv7uk")
+
+[connection signal="finished" from="DeathAudio" to="." method="_on_death_audio_finished"]
+[connection signal="finished" from="ExplosionParticles" to="." method="_on_explosion_particles_finished"]
