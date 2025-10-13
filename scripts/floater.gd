@@ -4,7 +4,7 @@ var target_position : Vector2
 var deceleration_radius : int = 100
 var y_spawn_range : int = randi_range(70, 150)
 var x_spawn_left : int = -50
-@onready var x_spawn_right : int = get_viewport_rect().size.x + 50
+@onready var x_spawn_right : float = get_viewport_rect().size.x + 50
 var collision_count : int = 0
 var score : int = 1000
 var audio_complete: bool = false
