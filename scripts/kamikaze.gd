@@ -27,13 +27,11 @@ func _process(delta):
 			if self.global_position.y >= 100:
 				state = State.TARGETING
 			velocity = velocity.move_toward(IDLE_DIRECTION * IDLE_MAX_SPEED, IDLE_ACCELERATION * delta)
-
 		State.TARGETING:
 			get_target()
 			self.rotation = target.angle() - (self.rotation / 2)
 			state = State.ATTACKING
 			$EngineAudio.play()
-
 		State.ATTACKING:
 			velocity = velocity.move_toward(target * max_speed, acceleration * delta)
 

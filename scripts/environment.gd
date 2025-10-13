@@ -8,7 +8,7 @@ var timer_max : Dictionary = {
 }
 
 const kamikaze_wave_start : int = 5
-const kamikaze_spawn_min : int = 0.16
+const kamikaze_spawn_min : float = 0.16
 const kamikaze_cooldown_min : int = 2
 var kamikaze_wave : int = kamikaze_wave_start
 var kamikaze_increase : int = 1

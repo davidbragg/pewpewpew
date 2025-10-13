@@ -11,6 +11,10 @@ class_name Main extends Node2D
 var spawn_kamikaze : bool = false
 var kamikaze_count : int = 0
 
+var dbg_disable_kamikaze : bool = false
+var dbg_disable_floater : bool = false
+var dbg_disable_hunter : bool = false
+
 var file_path = "user://highscore.save"
 
 @onready var play_boundary_collider : CollisionPolygon2D = $Play_Boundary.get_child(0)
@@ -59,10 +63,10 @@ func _process(_delta):
 ### Enemy Spawn and Control ###
 ##################################
 func _on_kamikaze_cooldown_timer_timeout():
-	spawn_kamikaze = true
+		spawn_kamikaze = true
 
 func _on_kamikaze_timer_timeout():
-	if spawn_kamikaze:
+	if spawn_kamikaze && dbg_disable_kamikaze == false:
 		add_kamikaze()
 
 func add_kamikaze():
@@ -77,14 +81,16 @@ func add_kamikaze():
 		kamikaze_count = 0
 
 func _on_floater_cool_down_timer_timeout():
-	var floater = floater_scene.instantiate()
-	add_child(floater)
+	if dbg_disable_floater == false:
+		var floater = floater_scene.instantiate()
+		add_child(floater)
 
 
 func _on_hunter_cool_down_timer_timeout():
-	var hunter = hunter_scene.instantiate()
-	hunter.global_position = Vector2(randf_range(50, get_viewport_rect().size.x -50), -50)
-	add_child(hunter)
+	if dbg_disable_hunter == false:
+		var hunter = hunter_scene.instantiate()
+		hunter.global_position = Vector2(randf_range(50, get_viewport_rect().size.x -50), -50)
+		add_child(hunter)
 
 
 func _on_difficulty_ramp_timeout():
