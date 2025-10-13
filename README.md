@@ -1,3 +1,5 @@
+> Project has migrated to worktree: https://worktree.ca/heavyliftingindustries/pewpewpew
+
 # pewpewpew
 
 Proof of concept of a vertically scrolling shmup in the style of Twin Cobra, 1942, and Raiden. This project was originally started (and abandoned) in [löve](https://love2d.org) and later switched to Godot.
